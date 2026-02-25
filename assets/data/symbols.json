@@ -1,0 +1,76 @@
+{
+  "rose": {
+    "textureData": {
+      "texture": null,
+      "textureName": "/rose.PNG"
+    },
+
+    "positionOnPaper": [54, 35],
+    "widthOnPaper": 47,
+
+    "location": "planet2",
+
+    "name": "Růže",
+    "text": "„Stáváš se navždy odpovědným za to, cos k sobě připoutal.“\n\nRůže symbolizuje lásku, jedinečnost a odpovědnost za druhého. Je krásná, ale zároveň pyšná a někdy i zraňující, stejně jako vztahy mezi lidmi. Pro Malého prince je výjimečná ne proto, že by byla jediná na světě, ale proto, že jí věnoval svůj čas, péči a lásku. Ukazuje, že opravdová láska není dokonalá, ale je založená na trpělivosti a odpovědnosti."
+  },
+
+  "fox": {
+    "textureData": {
+      "texture": null,
+      "textureName": "/fox.PNG"
+    },
+
+    "positionOnPaper": [57, 31],
+    "widthOnPaper": 81,
+
+    "location": "planet3",
+
+    "name": "Liška",
+    "text": "„Ochočit znamená vytvořit si k někomu pouto.“\n\nLiška představuje přátelství, důvěru a vytváření vztahů. Vztahy nevznikají hned, ale postupně – skrze čas, trpělivost a společné zážitky. Liška také vysvětluje, že to nejdůležitější není vidět očima, ale srdcem. Je symbolem hlubokého lidského spojení a připomíná, že skutečné hodnoty nejsou viditelné na první pohled."
+  },
+
+  "money": {
+    "textureData": {
+      "texture": null,
+      "textureName": "/money.PNG"
+    },
+
+    "positionOnPaper": [39, 24],
+    "widthOnPaper": 70,
+
+    "location": "planet4",
+
+    "name": "Peníze",
+    "text": "„Skutečné bohatství nespočívá v tom, co vlastníme, ale v tom, co prožíváme a koho máme rádi.“\n\nPeníze symbolizují svět dospělých, kteří často dávají přednost majetku a číslům před skutečnými hodnotami. V knize je to vidět například na postavě obchodníka či byznysmena, který chce vlastnit hvězdy jen proto, aby byl bohatý. Nezajímá ho jejich krása ani radost, kterou mohou přinášet. Peníze zde představují povrchnost a ztrátu fantazie."
+  },
+
+  "crown": {
+    "textureData": {
+      "texture": null,
+      "textureName": "/crown.PNG"
+    },
+
+    "positionOnPaper": [50.5, 33],
+    "widthOnPaper": 51,
+
+    "location": "planet5",
+
+    "name": "Koruna",
+    "text": "„Skutečná autorita nespočívá v rozkazování, ale v odpovědnosti a moudrosti.“\n\nKoruna symbolizuje moc a autoritu. Král si myslí, že vládne všemu, ale ve skutečnosti nemá komu vládnout. Jeho postava ukazuje, že moc bez lidí a bez skutečného smyslu je prázdná a směšná. Král vydává pouze takové rozkazy, o nichž ví, že se přirozeně splní. Nechce riskovat, že by jeho příkaz nebyl vykonán, a tak si svou autoritu udržuje jen zdánlivě."
+  },
+
+  "snake": {
+    "textureData": {
+      "texture": null,
+      "textureName": "/snake.PNG"
+    },
+
+    "positionOnPaper": [50.5, 27.5],
+    "widthOnPaper": 58,
+
+    "location": "planet6",
+
+    "name": "Had",
+    "text": "„Některé věci nejsou takové, jak se na první pohled zdají, a i konec může znamenat nový začátek.“\n\nHad symbolizuje smrt, ale ne jako konec, spíše jako přechod nebo návrat domů. Na začátku působí tajemně a nebezpečně, ale nakonec umožní Malému princi vrátit se na svou planetu. Jeho jed představuje způsob, jak opustit tělo a vrátit se k tomu, co je opravdu důležité."
+  }
+}
