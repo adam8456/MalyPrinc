@@ -10,17 +10,17 @@ let spaceBackground;
 
 // Paths
 const paths = {
-    assets: "assets",
+    assets: "assets/",
 
-    textures: "/textures",
-    data: "/data",
-    fonts: "/fonts",
+    textures: "textures/",
+    data: "data/",
+    fonts: "fonts/",
 
-    icons: "/icons",
-    backgrounds: "/backgrounds",
-    symbols: "/symbols",
-    characters: "/characters",
-    planets: "/planets"
+    icons: "icons/",
+    backgrounds: "backgrounds/",
+    symbols: "symbols/",
+    characters: "characters/",
+    planets: "planets/"
 };
 
 // Landing
@@ -37,11 +37,11 @@ let prince = {
     textureData: {
         noFox: {
             texture: null,
-            textureName: "/plane.PNG"
+            textureName: "plane.PNG"
         },
         withFox: {
             texture: null,
-            textureName: "/plane_fox.PNG"
+            textureName: "plane_fox.PNG"
         }
     },
 
@@ -166,7 +166,7 @@ let planets = {
         planet1: {
             textureData: {
                 texture: null,
-                textureName: "/planet1.PNG"
+                textureName: "planet1.PNG"
             },
             position: {
                 original: [200, 850],
@@ -181,7 +181,7 @@ let planets = {
         planet2: {
             textureData: {
                 texture: null,
-                textureName: "/planet2.PNG"
+                textureName: "planet2.PNG"
             },
             position: {
                 original: [450, 300],
@@ -196,7 +196,7 @@ let planets = {
         planet3: {
             textureData: {
                 texture: null,
-                textureName: "/planet3.PNG"
+                textureName: "planet3.PNG"
             },
             position: {
                 original: [750, 800],
@@ -211,7 +211,7 @@ let planets = {
         planet4: {
             textureData: {
                 texture: null,
-                textureName: "/planet4.PNG"
+                textureName: "planet4.PNG"
             },
             position: {
                 original: [1000, 300],
@@ -226,7 +226,7 @@ let planets = {
         planet5: {
             textureData: {
                 texture: null,
-                textureName: "/planet5.PNG"
+                textureName: "planet5.PNG"
             },
             position: {
                 original: [1300, 800],
@@ -241,7 +241,7 @@ let planets = {
         planet6: {
             textureData: {
                 texture: null,
-                textureName: "/planet6.PNG"
+                textureName: "planet6.PNG"
             },
             position: {
                 original: [1600, 300],
@@ -325,7 +325,7 @@ let planets = {
 let paper = {
     textureData: {
         texture: null,
-        textureName: "/bg_paper.PNG"
+        textureName: "bg_paper.PNG"
     },
     
     width: {
@@ -441,7 +441,7 @@ let paper = {
     cross: {
         textureData: {
             texture: null,
-            textureName: "/cross.PNG"
+            textureName: "cross.PNG"
         },
 
         // Percentage of paper width/height
@@ -545,9 +545,9 @@ async function setup() {
     
     paper.scaleCoordinates();
 
-    paper.symbol.symbolData = await loadJSON(paths.assets + paths.data + "/symbols.json");
+    paper.symbol.symbolData = await loadJSON(paths.assets + paths.data + "symbols.json");
     
-    timesNewRoman = await loadFont(paths.assets + paths.fonts + "/timesNewRoman.otf");
+    timesNewRoman = await loadFont(paths.assets + paths.fonts + "timesNewRoman.otf");
     textFont(timesNewRoman);
 
     await loadAllImages();
@@ -615,7 +615,7 @@ function windowResized() {
 }
 
 async function loadAllImages() {
-    spaceBackground = await loadImage(paths.assets + paths.textures + paths.backgrounds + "/bg_space.PNG");
+    spaceBackground = await loadImage(paths.assets + paths.textures + paths.backgrounds + "bg_space.PNG");
     paper.textureData.texture = await loadImage(paths.assets + paths.textures + paths.backgrounds + paper.textureData.textureName)
 
     paper.cross.textureData.texture = await loadImage(paths.assets + paths.textures + paths.icons + paper.cross.textureData.textureName);

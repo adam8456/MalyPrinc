@@ -2,7 +2,7 @@
   "rose": {
     "textureData": {
       "texture": null,
-      "textureName": "/rose.PNG"
+      "textureName": "rose.PNG"
     },
 
     "positionOnPaper": [54, 35],
@@ -17,7 +17,7 @@
   "fox": {
     "textureData": {
       "texture": null,
-      "textureName": "/fox.PNG"
+      "textureName": "fox.PNG"
     },
 
     "positionOnPaper": [57, 31],
@@ -32,7 +32,7 @@
   "money": {
     "textureData": {
       "texture": null,
-      "textureName": "/money.PNG"
+      "textureName": "money.PNG"
     },
 
     "positionOnPaper": [39, 24],
@@ -47,7 +47,7 @@
   "crown": {
     "textureData": {
       "texture": null,
-      "textureName": "/crown.PNG"
+      "textureName": "crown.PNG"
     },
 
     "positionOnPaper": [50.5, 33],
@@ -62,7 +62,7 @@
   "snake": {
     "textureData": {
       "texture": null,
-      "textureName": "/snake.PNG"
+      "textureName": "snake.PNG"
     },
 
     "positionOnPaper": [50.5, 27.5],
