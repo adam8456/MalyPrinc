@@ -10,7 +10,7 @@ let spaceBackground;
 
 // Paths
 const paths = {
-    assets: "/assets",
+    assets: "assets",
 
     textures: "/textures",
     data: "/data",
