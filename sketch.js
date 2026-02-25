@@ -1,12 +1,20 @@
 let dT;
+
 let showHitboxes = false;
 
-const foxPlanet = "planet3";
-
 let timesNewRoman;
-
-// Sprites
 let spaceBackground;
+
+// Ratio
+const minRatio = 3/2;
+const maxRatio = 21/9;
+let currentRatio;
+
+let ratioTooSmall;
+let ratioTooLarge;
+
+// Planet with fox
+const foxPlanet = "planet3";
 
 // Paths
 const paths = {
@@ -91,7 +99,7 @@ let prince = {
         if (this.moving) {
             let dx = this.position.target.original[0] - this.position.current.original[0];
             let dy = this.position.target.original[1] - this.position.current.original[1];
-    
+
             let distance = dist(
                 this.position.current.original[0], this.position.current.original[1],
                 this.position.target.original[0], this.position.target.original[1]
@@ -286,7 +294,6 @@ let planets = {
                 paper.paperSequenceActive = true;
             } else {
                 landingTimer -= deltaTime;
-                console.log(landingTimer)
             }
         }
 
@@ -369,7 +376,7 @@ let paper = {
 
                 this.position = [
                     (width - paper.width.scaled) / 2 + positionOnPaper[0] / 100 * paper.width.scaled,
-                    height / 2 - paper.textureData.texture.height * (paper.width.scaled / paper.textureData.texture.width)/2 + positionOnPaper[1] / 100 * paper.textureData.texture.height * (paper.width.scaled / paper.textureData.texture.width)
+                    height / 2 - paper.textureData.texture.height * (paper.width.scaled / paper.textureData.texture.width) / 2 + positionOnPaper[1] / 100 * paper.textureData.texture.height * (paper.width.scaled / paper.textureData.texture.width)
                 ];
 
                 this.width = (widthOnPaper / 100) * paper.width.scaled;
@@ -390,17 +397,26 @@ let paper = {
 
             position: [],
 
+            fontSize: {
+                original: 75,
+                scaled: null
+            },
+
+            scaleFontSize() {
+                this.fontSize.scaled = this.fontSize.original * width / 2560;
+            },
+
             draw() {
                 const symbolName = paper.symbol.symbolData[paper.symbol.currentSymbol].name;
 
                 this.position = [
                     (width - paper.width.scaled) / 2 + this.positionOnPaper[0] / 100 * paper.width.scaled,
-                    height / 2 - paper.textureData.texture.height * (paper.width.scaled / paper.textureData.texture.width)/2 + this.positionOnPaper[1] / 100 * paper.textureData.texture.height * (paper.width.scaled / paper.textureData.texture.width)
+                    height / 2 - paper.textureData.texture.height * (paper.width.scaled / paper.textureData.texture.width) / 2 + this.positionOnPaper[1] / 100 * paper.textureData.texture.height * (paper.width.scaled / paper.textureData.texture.width)
                 ];
 
                 push();
+                    textSize(this.fontSize.scaled);
                     textAlign(CENTER, CENTER);
-                    textSize(75);
                     text(symbolName, this.position[0], this.position[1]);
                 pop();
             }
@@ -408,10 +424,19 @@ let paper = {
 
         text: {
             positionOnPaper: [50, 53],
-            widthOnPaper: 75,
+            widthOnPaper: 75,            
 
             position: [],
             width: null,
+
+            fontSize: {
+                original: 34,
+                scaled: null
+            },
+
+            scaleFontSize() {
+                this.fontSize.scaled = this.fontSize.original * width / 2560;
+            },
 
             draw() {
                 const symbolText = paper.symbol.symbolData[paper.symbol.currentSymbol].text;
@@ -419,13 +444,14 @@ let paper = {
                 this.width = (this.widthOnPaper / 100) * paper.width.scaled;
 
                 this.position = [
-                    (width - paper.width.scaled) / 2 + this.positionOnPaper[0] / 100 * paper.width.scaled - this.width / 2,
-                    height / 2 - paper.textureData.texture.height * (paper.width.scaled / paper.textureData.texture.width)/2 + this.positionOnPaper[1] / 100 * paper.textureData.texture.height * (paper.width.scaled / paper.textureData.texture.width)
+                    (width - paper.width.scaled) / 2 + this.positionOnPaper[0] / 100 * paper.width.scaled,
+                    height / 2 - paper.textureData.texture.height * (paper.width.scaled / paper.textureData.texture.width) / 2 + this.positionOnPaper[1] / 100 * paper.textureData.texture.height * (paper.width.scaled / paper.textureData.texture.width)
                 ];
 
                 push();
+                    textSize(this.fontSize.scaled);
                     textAlign(CENTER, TOP);
-                    textSize(34);
+                    rectMode(CENTER);
                     text(symbolText, this.position[0], this.position[1], this.width);
                 pop();
             }
@@ -466,7 +492,7 @@ let paper = {
 
                 this.position = [
                     (width - paper.width.scaled) / 2 + this.positionOnPaper[0] / 100 * paper.width.scaled,
-                    height / 2 - paper.textureData.texture.height * (paper.width.scaled / paper.textureData.texture.width)/2 + this.positionOnPaper[1] / 100 * paper.textureData.texture.height * (paper.width.scaled / paper.textureData.texture.width)
+                    height / 2 - paper.textureData.texture.height * (paper.width.scaled / paper.textureData.texture.width) / 2 + this.positionOnPaper[1] / 100 * paper.textureData.texture.height * (paper.width.scaled / paper.textureData.texture.width)
                 ];
 
                 this.width = (this.widthOnPaper / 100) * paper.width.scaled;
@@ -494,6 +520,9 @@ let paper = {
 
     scaleCoordinates() {
         paper.width.scaled = paper.width.original / 1920 * width;
+
+        paper.symbol.name.scaleFontSize();
+        paper.symbol.text.scaleFontSize();
     },
 
     draw() {
@@ -518,8 +547,8 @@ let paper = {
             if (this.visible || this.animationInProgress) {
                 image(
                     this.textureData.texture,
-                    width/2,
-                    height/2,
+                    width / 2,
+                    height / 2,
                     this.width.scaled,
                     this.textureData.texture.height * (this.width.scaled / this.textureData.texture.width)
                 );
@@ -538,22 +567,50 @@ async function setup() {
 
     imageMode(CENTER);
 
-    planets.scaleCoordinates();
-
     prince.position.current.original = [...prince.position.start.original];
-    prince.scaleCoordinates();
-    
-    paper.scaleCoordinates();
+
+    scaleAllCoordinates();
+
+    currentRatio = width / height;
+    ratioTooSmall = currentRatio < minRatio;
+    ratioTooLarge = currentRatio > maxRatio;
 
     paper.symbol.symbolData = await loadJSON(paths.assets + paths.data + "symbols.json");
-    
     timesNewRoman = await loadFont(paths.assets + paths.fonts + "timesNewRoman.otf");
+
     textFont(timesNewRoman);
 
     await loadAllImages();
 }
 
 function draw() {
+    background(0);
+
+    if (ratioTooSmall || ratioTooLarge) {
+        let errorMessage;
+
+        push();
+            fill(255);
+            textAlign(CENTER, CENTER);
+            textSize(50);
+
+            if (ratioTooSmall) {
+                errorMessage = "Poměr stran musí být minimálně 3:2.";
+            } else if (ratioTooLarge) {
+                errorMessage = "Poměr stran musí být maximálně 21:9."
+            }
+
+            text(
+                errorMessage,
+                0,
+                height / 2,
+                width
+            );
+        pop();
+
+        return;
+    }
+
     dT = deltaTime / 1000;
     
     hovering = "none";
@@ -561,8 +618,13 @@ function draw() {
     prince.canMove = false;
     prince.scalePosition();
 
-    background(0);
-    image(spaceBackground, width/2, height/2, width, spaceBackground.height * (width / spaceBackground.width));
+    image(
+        spaceBackground,
+        width  / 2,
+        height / 2,
+        width,
+        spaceBackground.height * (width / spaceBackground.width)
+    );
 
     planets.draw();
     prince.draw();
@@ -597,21 +659,17 @@ function keyPressed() {
 }
 
 function windowResized() {
-    if (windowWidth <= spaceBackground.width == false) {
-        resizeCanvas(windowWidth, windowHeight);
-        
-        for (const key in planets.planetData) {
-            const planet = planets.planetData[key];
-            
-            planet.position.scaled = [planet.position[0] / 1920 * width, planet.position[1] / 1920 * width];
-            planet.width.scaled = planet.scale / 1920 * width;
-        }
+    resizeCanvas(windowWidth, windowHeight);
 
-        prince.position.current.scaled = [prince.position.current.original[0] / 1920 * width, prince.position.current.original[1] / 1080 * height];
-        prince.width.scaled = prince.width.original / 1920 * width;
+    currentRatio = width / height;
+    ratioTooSmall = currentRatio < minRatio;
+    ratioTooLarge = currentRatio > maxRatio;
 
-        paper.width.scaled = paper.width.original / 1920 * width;
+    if (ratioTooSmall || ratioTooLarge) {
+        return;
     }
+    
+    scaleAllCoordinates();
 }
 
 async function loadAllImages() {
@@ -632,4 +690,10 @@ async function loadAllImages() {
     for (const key in paper.symbol.symbolData) {
         paper.symbol.symbolData[key].textureData.texture = await loadImage(paths.assets + paths.textures + paths.symbols + paper.symbol.symbolData[key].textureData.textureName);
     }
+}
+
+function scaleAllCoordinates() {
+    planets.scaleCoordinates();
+    prince.scaleCoordinates();
+    paper.scaleCoordinates();
 }
