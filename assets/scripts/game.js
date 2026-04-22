@@ -6,6 +6,9 @@ let showHitboxes = false;
 let timesNewRoman;
 let spaceBackground;
 
+let homeIcon;
+let homeHovering;
+
 // Ratio
 const minRatio = 3/2;
 const maxRatio = 21/9;
@@ -282,8 +285,6 @@ let planets = {
             if (dist(mouseX, mouseY, planet.position.scaled[0], planet.position.scaled[1]) <= planet.width.scaled / 2) {
                 hovering = key;
                 break;
-            } else {
-                cursor(ARROW);
             }
         }
 
@@ -503,7 +504,6 @@ let paper = {
                     cursor(HAND);
                 } else {
                     crossWidth = this.width;
-                    cursor(ARROW);
                 }
 
                 this.height = this.textureData.texture.height * (crossWidth / this.textureData.texture.width);
@@ -595,45 +595,44 @@ async function setup() {
 function draw() {
     background(0);
 
-    // if (ratioTooSmall || ratioTooLarge) {
-    //     let errorMessage;
-
-    //     push();
-    //         fill(255);
-    //         textAlign(CENTER, CENTER);
-    //         textSize(50);
-
-    //         if (ratioTooSmall) {
-    //             errorMessage = "Poměr stran musí být minimálně 3:2.";
-    //         } else if (ratioTooLarge) {
-    //             errorMessage = "Poměr stran musí být maximálně 21:9."
-    //         }
-
-    //         text(
-    //             errorMessage,
-    //             0,
-    //             height / 2,
-    //             width
-    //         );
-    //     pop();
-
-    //     return;
-    // }
-
     dT = deltaTime / 1000;
     
+    cursor(ARROW);
+    
     hovering = "none";
+
+    homeHovering = mouseX > width * 0.03 - width * 0.06 / 2 && mouseX < width * 0.03 + width * 0.06 / 2 && mouseY > height * 0.07 - homeIcon.height * (width * 0.06 / homeIcon.width) / 2 && mouseY < height * 0.07 + homeIcon.height * (width * 0.06 / homeIcon.width) / 2;
 
     prince.canMove = false;
     prince.scalePosition();
 
     image(
         spaceBackground,
-        width  / 2,
+        width / 2,
         height / 2,
         width,
         spaceBackground.height * (width / spaceBackground.width)
     );
+
+    if (!homeHovering) {
+        image(
+            homeIcon,
+            width * 0.03,
+            height * 0.08,
+            width * 0.06,
+            homeIcon.height * (width * 0.06 / homeIcon.width)
+        );
+    } else {
+        cursor(HAND);
+
+        image(
+            homeIcon,
+            width * 0.03,
+            height * 0.08,
+            width * 0.06 * hoverZoom,
+            homeIcon.height * (width * 0.06 / homeIcon.width) * hoverZoom
+        );
+    }
 
     planets.draw();
     prince.draw();
@@ -656,6 +655,10 @@ function mousePressed() {
                 prince.movingRight = false;
             }
         }
+
+        if (homeHovering) {
+            window.location.href = "http://127.0.0.1:5500/";
+        }
     }
 }
 
@@ -675,23 +678,21 @@ function windowResized() {
     currentRatio = width / height;
     ratioTooSmall = currentRatio < minRatio;
     ratioTooLarge = currentRatio > maxRatio;
-
-    // if (ratioTooSmall || ratioTooLarge) {
-    //     return;
-    // }
     
     scaleAllCoordinates();
 }
 
 async function loadAllImages() {
     spaceBackground = await loadImage(paths.assets + paths.textures + paths.backgrounds + "bg_space.PNG");
+    homeIcon = await loadImage(paths.assets + paths.textures + paths.icons + "home.PNG");
+
     paper.textureData.texture = await loadImage(paths.assets + paths.textures + paths.backgrounds + paper.textureData.textureName)
 
     paper.cross.textureData.texture = await loadImage(paths.assets + paths.textures + paths.icons + paper.cross.textureData.textureName);
 
     prince.textureData.noFox.texture = await loadImage(paths.assets + paths.textures + paths.characters + prince.textureData.noFox.textureName);
     prince.textureData.withFox.texture = await loadImage(paths.assets + paths.textures + paths.characters + prince.textureData.withFox.textureName);
-    
+
     for (const key in planets.planetData) {
         const planet = planets.planetData[key];
 
