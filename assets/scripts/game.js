@@ -12,10 +12,6 @@ let homeHovering;
 // Ratio
 const minRatio = 3/2;
 const maxRatio = 21/9;
-let currentRatio;
-
-let ratioTooSmall;
-let ratioTooLarge;
 
 // Planet with fox
 const foxPlanet = "planet3";
@@ -580,10 +576,6 @@ async function setup() {
 
     scaleAllCoordinates();
 
-    currentRatio = width / height;
-    ratioTooSmall = currentRatio < minRatio;
-    ratioTooLarge = currentRatio > maxRatio;
-
     paper.symbol.symbolData = await loadJSON(paths.assets + paths.data + "symbols.json");
     timesNewRoman = await loadFont(paths.assets + paths.fonts + "timesNewRoman.otf");
 
@@ -657,7 +649,7 @@ function mousePressed() {
         }
 
         if (homeHovering) {
-            window.location.href = "http://127.0.0.1:5500/";
+            window.location.href = "/";
         }
     }
 }
@@ -674,11 +666,6 @@ function keyPressed() {
 
 function windowResized() {
     resizeToAspectRatio();
-
-    currentRatio = width / height;
-    ratioTooSmall = currentRatio < minRatio;
-    ratioTooLarge = currentRatio > maxRatio;
-    
     scaleAllCoordinates();
 }
 
