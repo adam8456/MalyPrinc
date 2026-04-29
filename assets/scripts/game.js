@@ -649,7 +649,7 @@ function mousePressed() {
         }
 
         if (homeHovering) {
-            window.location.href = "/";
+            window.location.href = "index.html";
         }
     }
 }
