@@ -112,7 +112,7 @@ function draw() {
 
         push();
             textSize(70 * height / 1080 * buttons.start.newSize);
-            text("START", width / 2, height * buttons.start.positionY);
+            text("Začít", width / 2, height * buttons.start.positionY);
         pop();
 
         push();
